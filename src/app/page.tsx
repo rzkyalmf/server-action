@@ -1,3 +1,19 @@
-export default function Page() {
-  return <div> hello world !</div>;
+import { CreateNote } from "@/components/createNote";
+import { prisma } from "@/db/utils/prisma";
+
+export default async function Home() {
+  // GET Data
+  const getDataNotes = await prisma.note.findMany();
+
+  return (
+    <main className="max-w-lg m-auto space-y-4 my-4">
+      <h1 className="text-3xl font-bold"> Create Your Notes APP</h1>
+      <CreateNote />
+      <div>
+        {getDataNotes.map((note: { id: string; content: string }) => {
+          return <div key={note.id}>{note.content}</div>;
+        })}
+      </div>
+    </main>
+  );
 }
