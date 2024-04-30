@@ -1,9 +1,9 @@
 "use client";
 
-import { NotesAction } from "@/actions/notesAction";
+import { CreateNotes } from "@/actions/createNotes";
 import { useRef } from "react";
 
-export const CreateNote = () => {
+export const Notes = () => {
   //ketika submit, notes yang ada ditextarea akan direset
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -12,7 +12,7 @@ export const CreateNote = () => {
       <form
         ref={formRef}
         action={async (formData) => {
-          NotesAction(formData);
+          CreateNotes(formData);
           formRef.current?.reset();
         }}
         className="space-y-2"
