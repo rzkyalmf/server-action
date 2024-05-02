@@ -1,8 +1,17 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+import type { Metadata } from "next";
+import { Inter as FontSans } from "next/font/google";
+import { twMerge } from "tailwind-merge";
+
+import { Toaster } from "@/components/ui/sonner";
+import { Provider } from "@/components/provider";
+
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  weight: ["400", "500", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -11,12 +20,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={twMerge(fontSans.className)}>
+        <Provider>{children}</Provider>
+        <Toaster />
+      </body>
     </html>
   );
 }
